@@ -99,7 +99,7 @@ class DoubleQLearning:
             averages.append(val/simulations)
         # print(averages, '\n\n')
         plt.plot([i for i in range(episodes)], averages)
-        plt.plot([i for i in range(episodes)], [-1/3 for _ in range(episodes)])
+        plt.plot([i for i in range(episodes)], [11 for _ in range(episodes)])
         # plt.ylim((-0.9, -0.3))
         plt.xlabel("Episode Number")
         plt.ylabel("Average Reinforcement Value")
@@ -107,7 +107,7 @@ class DoubleQLearning:
                 
 
 test = DoubleQLearning()
-test.double_q_learning(0.1, "1/T", 0.9, 500, 10)
+test.double_q_learning(0.1, "1/T", 0.9, 1000, 1000)
 # test.double_q_learning(1, 1, 1, 500, 10)
 
 # test.q_learning(0.1, 0.25, 0.9, 1000, 10)
