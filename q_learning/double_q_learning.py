@@ -66,6 +66,7 @@ class DoubleQLearning:
                                                               learning_rate * \
                                                               (reward + (self.gamma * self.q_table_b[new_state][a_act]) -
                                                                       self.q_table_a[self.cur_state][self.cur_action])
+        # Update Q-table B
         else:
 
             self.action_update_counter_b[self.cur_state][self.cur_action] += 1

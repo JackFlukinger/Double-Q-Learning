@@ -8,7 +8,7 @@ from environments.penalty_environment import PenaltyEnvironment
 
 def test_climbing():
     environment = ClimbingEnvironment()
-    environment.run_tests(0.1, "1/T", 0.97, 0.95, 200, 1000)
+    environment.run_tests("1/T", "1/T", 0.97, 0.95, 200, 1000)
 
 
 def test_penalty():
@@ -18,22 +18,22 @@ def test_penalty():
 
 def test_partially_stochastic_climbing():
     environment = PartiallyStochasticClimbingEnvironment()
-    environment.run_tests(0.1, "1/T", 0.97, 0.95, 200, 1000)
+    environment.run_tests("1/T", "1/T", 0.97, 0.95, 200, 1000)
 
 
 def test_fully_stochastic_climbing():
     environment = FullyStochasticClimbingEnvironment()
-    environment.run_tests(0.1, "1/T", 0.97, 0.95, 200, 1000)
+    environment.run_tests("1/T", "1/T", 0.97, 0.95, 200, 1000)
 
 
 def test_coordination():
     environment = CoordinationEnvironment(0)
-    environment.run_tests(0.1, "1/T", 0.97, 0.95, 200, 1000)
+    environment.run_tests("1/T", "1/T", 0.97, 0.95, 200, 1000)
 
 
 def test_custom():
     environment = CustomEnvironment()
-    environment.run_tests(0.1, "1/T", 0.97, 0.8, 200, 1000)
+    environment.run_tests("1/T", "1/T", 0.97, 0.95, 200, 1000)
 
 
-test_partially_stochastic_climbing()
+test_climbing()
