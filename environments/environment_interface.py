@@ -127,8 +127,11 @@ class EnvironmentInterface:
             a1_avg_reinforcement_value.append(a1_total / num_steps)
             a2_avg_reinforcement_value.append(a2_total / num_steps)
 
-            agent1.reset()
-            agent2.reset()
+            agent1.reset_state()
+            agent2.reset_state()
+
+        agent1.reset_time()
+        agent2.reset_time()
 
         return a1_avg_reinforcement_value, a2_avg_reinforcement_value
 

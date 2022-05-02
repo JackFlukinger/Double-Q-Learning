@@ -11,6 +11,7 @@ class DoubleQLearning:
         self.num_states = num_states
         self.start_state = start_state
 
+        self.time = 0
         self.cur_state = start_state
         self.cur_action = None
 
@@ -30,18 +31,21 @@ class DoubleQLearning:
         """Select action, abstract for extendability by either softmax, egreedy, or random"""
         pass
 
+    def get_time(self) -> int:
+        return self.time
+
     def get_state(self) -> int:
         return self.cur_state
 
-    def reset(self):
+    def reset_state(self):
         self.cur_state = self.start_state
 
+    def reset_time(self):
+        self.time = 0
+
     def optimal_action(self, state):
-
-        merged_q_table = [(x + y) / 2 for x, y in zip(self.q_table_a[state], self.q_table_b[state])]
-        optimal_action = merged_q_table.index(max(merged_q_table))
-
-        return optimal_action
+        """Select optimal action, abstract for extendability by either softmax, egreedy, or random"""
+        pass
 
     # Environment gives agent a new state and reward for taking an action
     def reward(self, reward, new_state):
@@ -56,7 +60,6 @@ class DoubleQLearning:
 
             if self.alpha == "1/T":
                 learning_rate = 1 / self.action_update_counter_a[self.cur_state][self.cur_action]
-
             a_max = max(self.q_table_a[self.cur_state])
             a_act = self.q_table_a[self.cur_state].index(a_max)
             self.q_table_a[self.cur_state][self.cur_action] = self.q_table_a[self.cur_state][self.cur_action] + \
