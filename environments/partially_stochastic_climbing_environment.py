@@ -9,29 +9,30 @@ class PartiallyStochasticClimbingEnvironment(EnvironmentInterface):
         c = "c"
 
         self.actions = [a, b, c]
-        self.num_states = 2
-        self.terminal_states = [1]
-        self.ylim = [-10,12]
+        self.num_states = 10
+        self.terminal_states = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        self.ylim = [-10, 12]
 
         self.t_func = {
-            (a, a): 11,
-            (a, b): -30,
-            (a, c): 0,
+            (0, a, a): [11, 1],
+            (0, a, b): [-30, 2],
+            (0, a, c): [0, 3],
 
-            (b, a): -30,
-            (b, b): [14, 0],
-            (b, c): 6,
+            (0, b, a): [-30, 4],
+            (0, b, b): [[14, 0], 5],
+            (0, b, c): [6, 6],
 
-            (c, a): 0,
-            (c, b): 0,
-            (c, c): 5,
+            (0, c, a): [0, 7],
+            (0, c, b): [0, 8],
+            (0, c, c): [5, 9],
         }
 
     # returns new a1_reward, a1_state, a2_reward, a2_state
     def reward_function(self, a1_state: int, a1_action: int, a2_state: int, a2_action: int) -> (int, int, int, int):
-        reward = self.t_func[(self.actions[a1_action], self.actions[a2_action])]
+        result = self.t_func[(a1_state, self.actions[a1_action], self.actions[a2_action])]
+        reward = result[0]
         if type(reward) is list:
             rand_reward = random.choice(reward)
-            return rand_reward, 1, rand_reward, 1
+            return rand_reward, result[1], rand_reward, result[1]
         else:
-            return reward, 1, reward, 1
+            return reward, result[1], reward, result[1]

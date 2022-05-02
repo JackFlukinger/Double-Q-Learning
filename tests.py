@@ -36,4 +36,4 @@ def test_custom():
     environment.run_tests(0.1, "1/T", 0.97, 0.8, 200, 1000)
 
 
-test_climbing()
+test_partially_stochastic_climbing()
