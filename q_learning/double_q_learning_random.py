@@ -1,5 +1,5 @@
 import random
-from double_q_learning import DoubleQLearning
+from q_learning.double_q_learning import DoubleQLearning
 
 
 class DoubleQLearningRandom(DoubleQLearning):
