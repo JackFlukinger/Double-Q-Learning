@@ -86,7 +86,6 @@ class EnvironmentInterface:
             a1_averages.append(a1_val / simulations)
             a2_averages.append(a2_val / simulations)
 
-        # print(averages, '\n\n')
         self.axis[plot_coords[0], plot_coords[1]].plot([i for i in range(episodes)], a1_averages, label="agent 1")
         self.axis[plot_coords[0], plot_coords[1]].plot([i for i in range(episodes)], a2_averages, label="agent 2")
 
@@ -103,7 +102,7 @@ class EnvironmentInterface:
         a2_avg_reinforcement_value = []
 
         for _ in range(episodes):
-
+            #print("Episode", _)
             num_steps = 0
             a1_total = 0
             a2_total = 0
@@ -116,7 +115,6 @@ class EnvironmentInterface:
                 a2_state = agent2.get_state()
 
                 rewards = self.reward_function(a1_state, a1_action, a2_state, a2_action)
-
                 agent1.reward(rewards[0], rewards[1])
                 a1_total += rewards[0]
                 agent2.reward(rewards[2], rewards[3])
@@ -141,8 +139,11 @@ class EnvironmentInterface:
         a1_reward = 0
         a2_reward = 0
         while self.terminal_states.count(a1_cur_state) == 0 and self.terminal_states.count(a2_cur_state) == 0:
-            result = self.reward_function(a1_cur_state, agent1.optimal_action(a1_cur_state), a2_cur_state,
-                                          agent2.optimal_action(a2_cur_state))
+
+            a1_optimal_action = agent1.optimal_action(a1_cur_state)
+            a2_optimal_action = agent2.optimal_action(a2_cur_state)
+            result = self.reward_function(a1_cur_state, a1_optimal_action, a2_cur_state,
+                                          a2_optimal_action)
             a1_cur_state = result[1]
             a1_reward += result[0]
             a2_cur_state = result[3]

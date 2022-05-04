@@ -1,6 +1,6 @@
 from environments.climbing_environment import ClimbingEnvironment
 from environments.coordination_environment import CoordinationEnvironment
-from environments.custom_environment import CustomEnvironment
+from environments.stochastic_coordination_environment import StochasticCoordinationEnvironment
 from environments.fully_stochastic_climbing_environment import FullyStochasticClimbingEnvironment
 from environments.partially_stochastic_climbing_environment import PartiallyStochasticClimbingEnvironment
 from environments.penalty_environment import PenaltyEnvironment
@@ -8,7 +8,7 @@ from environments.penalty_environment import PenaltyEnvironment
 
 def test_climbing():
     environment = ClimbingEnvironment()
-    environment.run_tests("1/T", "1/T", 0.97, 0.95, 200, 1000)
+    environment.run_tests("1/T", 0.1, 0.97, 0.95, 200, 1000)
 
 
 def test_penalty():
@@ -31,9 +31,9 @@ def test_coordination():
     environment.run_tests("1/T", "1/T", 0.97, 0.95, 200, 1000)
 
 
-def test_custom():
-    environment = CustomEnvironment()
+def test_stochastic_coordination():
+    environment = StochasticCoordinationEnvironment(-100)
     environment.run_tests("1/T", "1/T", 0.97, 0.95, 200, 1000)
 
 
-test_climbing()
+test_stochastic_coordination()

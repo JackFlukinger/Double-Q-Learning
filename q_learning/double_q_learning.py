@@ -60,8 +60,8 @@ class DoubleQLearning:
 
             if self.alpha == "1/T":
                 learning_rate = 1 / self.action_update_counter_a[self.cur_state][self.cur_action]
-            a_max = max(self.q_table_a[self.cur_state])
-            a_act = self.q_table_a[self.cur_state].index(a_max)
+            a_max = max(self.q_table_a[new_state])
+            a_act = self.q_table_a[new_state].index(a_max)
             self.q_table_a[self.cur_state][self.cur_action] = self.q_table_a[self.cur_state][self.cur_action] + \
                                                               learning_rate * \
                                                               (reward + (self.gamma * self.q_table_b[new_state][a_act]) -
@@ -74,10 +74,9 @@ class DoubleQLearning:
             if self.alpha == "1/T":
                 learning_rate = 1 / self.action_update_counter_b[self.cur_state][self.cur_action]
 
-            b_max = max(self.q_table_b[self.cur_state])
-            b_act = self.q_table_b[self.cur_state].index(b_max)
+            b_max = max(self.q_table_b[new_state])
+            b_act = self.q_table_b[new_state].index(b_max)
             self.q_table_b[self.cur_state][self.cur_action] = self.q_table_b[self.cur_state][self.cur_action] + learning_rate * (
-                    reward + (self.gamma * self.q_table_a[new_state][b_act]) - self.q_table_b[self.cur_state][
-                self.cur_action])
+                    reward + (self.gamma * self.q_table_a[new_state][b_act]) - self.q_table_b[self.cur_state][self.cur_action])
 
         self.cur_state = new_state
