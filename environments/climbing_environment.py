@@ -8,6 +8,8 @@ class ClimbingEnvironment(EnvironmentInterface):
         b = "b"
         c = "c"
 
+        self.name = "Climbing Game"
+
         self.actions = [a, b, c]
         self.num_states = 10
         self.terminal_states = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -26,6 +28,8 @@ class ClimbingEnvironment(EnvironmentInterface):
             (0, c, b): [0, 8],
             (0, c, c): [5, 9],
         }
+
+        self.optimal = 11
 
     # returns new a1_reward, a1_state, a2_reward, a2_state
     def reward_function(self, a1_state: int, a1_action: int, a2_state: int, a2_action: int) -> (int, int, int, int):

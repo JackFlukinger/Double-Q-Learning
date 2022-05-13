@@ -8,32 +8,32 @@ from environments.penalty_environment import PenaltyEnvironment
 
 def test_climbing():
     environment = ClimbingEnvironment()
-    environment.run_tests("1/T", 0.1, 0.97, 0.95, 200, 1000)
+    environment.run_tests("1/T", "1/T", 5000, 0.997, 0.95, 3000, 100)
 
 
-def test_penalty():
-    environment = PenaltyEnvironment(100)
-    environment.run_tests(0.1, "1/T", 0.97, 0.95, 200, 1000)
+def test_penalty(k):
+    environment = PenaltyEnvironment(k)
+    environment.run_tests("1/T", "1/T", 5000, 0.997, 0.95, 3000, 100)
 
 
 def test_partially_stochastic_climbing():
     environment = PartiallyStochasticClimbingEnvironment()
-    environment.run_tests("1/T", "1/T", 0.97, 0.95, 200, 1000)
+    environment.run_tests("1/T", "1/T", 5000, 0.997, 0.95, 4000, 100)
 
 
 def test_fully_stochastic_climbing():
     environment = FullyStochasticClimbingEnvironment()
-    environment.run_tests("1/T", "1/T", 0.97, 0.95, 200, 1000)
+    environment.run_tests("1/T", "1/T", 5000, 0.997, 0.95, 4000, 100)
 
 
-def test_coordination():
-    environment = CoordinationEnvironment(0)
-    environment.run_tests("1/T", "1/T", 0.97, 0.95, 200, 1000)
+def test_coordination(k):
+    environment = CoordinationEnvironment(k)
+    environment.run_tests("1/T", "1/T", 5000, 0.997, 0.95, 2000, 100)
 
 
-def test_stochastic_coordination():
-    environment = StochasticCoordinationEnvironment(-100)
-    environment.run_tests("1/T", "1/T", 0.97, 0.95, 200, 1000)
+def test_stochastic_coordination(k):
+    environment = StochasticCoordinationEnvironment(k)
+    environment.run_tests("1/T", "1/T", 5000, 0.997, 0.95, 2000, 100)
 
 
-test_stochastic_coordination()
+test_stochastic_coordination(-100)

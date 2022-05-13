@@ -8,6 +8,8 @@ class StochasticCoordinationEnvironment(EnvironmentInterface):
         a = "a"
         b = "b"
 
+        self.name = "Stochastic Coordination Game k=" + str(k)
+
         self.actions = [a, b]
         self.num_states = 6
         self.terminal_states = [3, 4, 5]
@@ -32,6 +34,12 @@ class StochasticCoordinationEnvironment(EnvironmentInterface):
             (2, b, a): [[4, 10], 5],
             (2, b, b): [[4, 10], 5],
         }
+
+        self.optimal = 11
+
+        if k > 11:
+            self.optimal = k
+            self.ylim = [0, k + 10]
 
     # returns new a1_reward, a1_state, a2_reward, a2_state
     def reward_function(self, a1_state: int, a1_action: int, a2_state: int, a2_action: int) -> (int, int, int, int):

@@ -17,9 +17,9 @@ class DoubleQLearningSoftmax(DoubleQLearning):
         weights = list(range(0, self.num_actions))
         denom = 0
         for action in range(0, self.num_actions):
-            denom += e ** (merged_q_table[action] / self.tau)
+            denom += e ** (merged_q_table[action] / (self.tau * (self.delta ** self.time)))
         for action in range(0, self.num_actions):
-            num = e ** (merged_q_table[action] / self.tau)
+            num = e ** (merged_q_table[action] / (self.tau * (self.delta ** self.time)))
             weights[action] = num / denom
         self.cur_action = random.choices(population, weights)[0]
         return self.cur_action

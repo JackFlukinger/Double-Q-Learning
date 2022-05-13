@@ -7,6 +7,9 @@ class PenaltyEnvironment(EnvironmentInterface):
         a = "a"
         b = "b"
         c = "c"
+
+        self.name = "Penalty Game k=" + str(k)
+
         self.t_func = {
             (0, a, a): [10, 1],
             (0, a, b): [0, 2],
@@ -24,6 +27,11 @@ class PenaltyEnvironment(EnvironmentInterface):
         self.num_states = 10
         self.terminal_states = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         self.ylim = [0, 100]
+
+        self.optimal = 10
+        if k > 10:
+            self.optimal = k
+            self.ylim = [0, k + 10]
 
     # returns new a1_reward, a1_state, a2_reward, a2_state
     def reward_function(self, a1_state: int, a1_action: int, a2_state: int, a2_action: int) -> (int, int, int, int):

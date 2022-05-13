@@ -2,10 +2,11 @@ import random
 
 class DoubleQLearning:
 
-    def __init__(self, alpha, epsilon, tau, gamma, num_actions, num_states, start_state=0):
+    def __init__(self, alpha, epsilon, tau, delta, gamma, num_actions, num_states, start_state=0):
         self.alpha = alpha
         self.epsilon = epsilon
         self.tau = tau
+        self.delta = delta
         self.gamma = gamma
         self.num_actions = num_actions
         self.num_states = num_states
@@ -15,8 +16,8 @@ class DoubleQLearning:
         self.cur_state = start_state
         self.cur_action = None
 
-        self.q_table_a = [[0] * self.num_actions for _ in range(0, self.num_states)]
-        self.q_table_b = [[0] * self.num_actions for _ in range(0, self.num_states)]
+        self.q_table_a = [[random.random() - 0.5] * self.num_actions for _ in range(0, self.num_states)]
+        self.q_table_b = [[random.random() - 0.5] * self.num_actions for _ in range(0, self.num_states)]
 
         self.action_update_counter_a = [[0] * self.num_actions for _ in range(0, self.num_states)]
         self.action_update_counter_b = [[0] * self.num_actions for _ in range(0, self.num_states)]
@@ -73,7 +74,6 @@ class DoubleQLearning:
 
             if self.alpha == "1/T":
                 learning_rate = 1 / self.action_update_counter_b[self.cur_state][self.cur_action]
-
             b_max = max(self.q_table_b[new_state])
             b_act = self.q_table_b[new_state].index(b_max)
             self.q_table_b[self.cur_state][self.cur_action] = self.q_table_b[self.cur_state][self.cur_action] + learning_rate * (
